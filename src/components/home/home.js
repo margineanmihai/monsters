@@ -10,15 +10,13 @@ class Home extends React.Component {
             searchField: '',
             changeBg: false
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleBgChange = this.handleBgChange.bind(this);
     }
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({searchField:event.target.value})
     }
     
-    handleBgChange(event) {
-    this.state.changeBg === false ? this.setState({changeBg:true}) : this.setState({changeBg:false});
+    handleBgChange = (event) => {
+        this.state.changeBg === false ? this.setState({changeBg:true}) : this.setState({changeBg:false});
     }
     
     componentDidMount() {

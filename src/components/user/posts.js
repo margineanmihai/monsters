@@ -1,7 +1,6 @@
 import React from 'react';
-import Post from '../post/post';
+import Post from './post';
 import {AppTitle} from '../../App.styles.js';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Posts extends React.Component {
     constructor(props) {
