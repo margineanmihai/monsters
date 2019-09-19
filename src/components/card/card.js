@@ -1,17 +1,19 @@
 import React from 'react';
-// import './card.styles.css';
-import {CardContainer} from './card.styles';
+import {CardContainer, MonsterName} from './card.styles';
+import { Link } from "react-router-dom";
 class Card extends React.Component {
     render() {
-        const monster = this.props.monster;
+        const {monster,changeBg} = this.props;
         const imgSrc = "https://robohash.org/" + monster.id;
-        // console.log(monster);
         return (
-            <CardContainer>
+            <CardContainer changeBg = {changeBg}>
                 <img src={imgSrc} /><br />
-                <span className="monsterName">{monster.name}</span><br />
-                <span className="monsterMail">{monster.email}</span>
-                
+                <MonsterName>{monster.name}</MonsterName>
+                <MonsterName email>{monster.email}</MonsterName><br />
+                <Link to={{
+                    pathname:`/${monster.id}`,
+                    state: {userName:monster.name}
+                }}> Posts </Link>
             </CardContainer>
         );
     }
