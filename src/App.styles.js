@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const AppTitle = styled.h4`
     font-weight: bold;

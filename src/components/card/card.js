@@ -7,7 +7,7 @@ class Card extends React.Component {
         const imgSrc = "https://robohash.org/" + monster.id;
         return (
             <CardContainer changeBg = {changeBg}>
-                <img src={imgSrc} /><br />
+                <img src={imgSrc} alt='Monster' /><br />
                 <MonsterName>{monster.name}</MonsterName>
                 <MonsterName email>{monster.email}</MonsterName><br />
                 <Link to={{
