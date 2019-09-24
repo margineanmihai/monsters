@@ -1,18 +1,19 @@
 import React from 'react';
+import {connect} from "react-redux";
 import {Search} from '../search/search';
 import CardList from '../card-list/card-list';
 import {Button} from './home.styles';
+import {setMonsterList} from "../../redux/monsters/monsters.actions";
+import {setSearchKey} from "../../redux/monsters/monsters.actions";
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            monsters: [],
-            searchField: '',
             changeBg: false
         };
     }
     handleChange = (event) => {
-        this.setState({searchField:event.target.value})
+        this.props.setSearchKey(event.target.value)
     }
     
     handleBgChange = (event) => {
@@ -22,22 +23,26 @@ class Home extends React.Component {
     componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
-        .then(monsters => this.setState({ monsters }));
+        .then(monsters => this.props.setMonsterList(monsters));
     }
 
     render() {
-        const monsters = this.state.monsters.filter(function(monster){
-            const name = monster.name;
-            return name.toLowerCase().includes(this.state.searchField);
-          },this)
+        // const monsters = this.state.monsters.filter(function(monster){
+        //     const name = monster.name;
+        //     return name.toLowerCase().includes(this.state.searchField);
+        //   },this)
         return (
             <div>
                 <Search handleChange={this.handleChange} placeholder='Search monster' /> 
                 <Button onClick={this.handleBgChange}> Change card background color </Button><br />
-                <CardList monsters={monsters} changeBg={this.state.changeBg} />
+                <CardList changeBg={this.state.changeBg} />
             </div>
         );
     }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => ({
+    setMonsterList: monsters => dispatch(setMonsterList(monsters)),
+    setSearchKey: search_key => dispatch(setSearchKey(search_key))
+})
+export default connect(null, mapDispatchToProps)(Home);

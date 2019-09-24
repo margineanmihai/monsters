@@ -23,7 +23,7 @@ class PostList extends React.Component {
                     posts.length && posts.map(post => 
                         post.editMode = false
                     )
-                    this.setState({ posts,userId })
+                    this.setState({ posts, userId })
                 });
     }
 
@@ -33,6 +33,7 @@ class PostList extends React.Component {
                 method: 'delete'
             })
           .then(data => {
+                console.log(data);
                 const newPosts = this.state.posts.filter(function(post){
                     return id!== post.id;
                   })
@@ -56,7 +57,6 @@ class PostList extends React.Component {
             title: this.state.title,
             body: this.state.body
         }
-        console.log(data);
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`,
             {
                 method: 'put',
@@ -81,11 +81,31 @@ class PostList extends React.Component {
         this.setState({posts});
     }
 
-    handleTitleChange = (event) => {
-        this.setState({title: event.target.value});
+    handleTitleChange = (event, postId) => {
+        const posts = this.state.posts; 
+        const editedPosts = posts.length && posts.map(post => 
+            {
+                if(post.id === postId) {
+                    post.title = event.target.value;
+                } 
+                return post;
+            }
+        )
+        console.log(editedPosts);
+        this.setState({posts: editedPosts});
     }
-    handleBodyChange = (event) => {
-        this.setState({body: event.target.value});
+    handleBodyChange = (event, postId) => {
+        const posts = this.state.posts; 
+        const editedPosts = posts.length && posts.map(post => 
+            {
+                if(post.id === postId) {
+                    post.body = event.target.value;
+                } 
+                return post;
+            }
+        )
+        console.log(editedPosts);
+        this.setState({posts: editedPosts});
     }
 
     render() {
@@ -103,7 +123,8 @@ class PostList extends React.Component {
                                 <label>Title:</label> <br />
                                 {
                                     post.editMode ? 
-                                    <Input value={this.state.title !== '' ? this.state.title : post.title} onChange={this.handleTitleChange} /> :
+                                    <Input value={this.state.title !== '' ? this.state.title : post.title} 
+                                        onChange={ (event) => this.handleTitleChange(event,post.id)} /> :
                                     post.title
                                 }
                                 
@@ -112,15 +133,15 @@ class PostList extends React.Component {
                                 <label>Body: </label> <br />
                                 {
                                     post.editMode ? 
-                                    <Textarea rows="6" onChange={this.handleBodyChange} 
+                                    <Textarea rows="6" onChange={(event) => this.handleBodyChange(event,post.id)} 
                                         value={this.state.body !== '' ? this.state.body : post.body} /> :
                                     post.body
                                 }
                             </p>
-                            <Button onClick = {this.handleDelete.bind(this,post.id)}>Delete</Button>
+                            <Button onClick = { () => this.handleDelete(post.id)}>Delete</Button>
                             {
-                                post.editMode ? <Button onClick = {this.handleSave.bind(this,post.id)}>Save</Button>:
-                                <Button onClick = {this.handleEdit.bind(this,post.id)}>Edit</Button>
+                                post.editMode ? <Button onClick = { () => this.handleSave(post.id)}>Save</Button>:
+                                <Button onClick = { () => this.handleEdit(post.id) }>Edit</Button>
                             }
                         </CardContainer>
                         
