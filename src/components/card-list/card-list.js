@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 
 class CardList extends React.Component {
     render() {
-        console.log(this.props);
         const {monsters,searchKey,changeBg} = this.props;
         return(
             monsters && monsters

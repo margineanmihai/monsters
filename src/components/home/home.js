@@ -27,10 +27,6 @@ class Home extends React.Component {
     }
 
     render() {
-        // const monsters = this.state.monsters.filter(function(monster){
-        //     const name = monster.name;
-        //     return name.toLowerCase().includes(this.state.searchField);
-        //   },this)
         return (
             <div>
                 <Search handleChange={this.handleChange} placeholder='Search monster' /> 

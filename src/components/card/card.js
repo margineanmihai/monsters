@@ -11,7 +11,7 @@ class Card extends React.Component {
                 <MonsterName>{monster.name}</MonsterName>
                 <MonsterName email>{monster.email}</MonsterName><br />
                 <Link to={{
-                    pathname:`/${monster.id}`,
+                    pathname:`/posts/${monster.id}`,
                     state: {userName:monster.name}
                 }}> Posts </Link>
             </CardContainer>
