@@ -13,9 +13,3 @@ export const fetchMonstersFailure = (error) => ({
     type: MonstersActionsTypes.FETCH_MONSTERS_FAILURE,
     payload: error
 })
-
-//todo - move search
-export const setSearchKey = (searchKey) => ({
-    type: MonstersActionsTypes.SET_SEARCH_KEY,
-    payload: searchKey
-})

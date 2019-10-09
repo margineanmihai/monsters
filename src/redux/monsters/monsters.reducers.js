@@ -3,7 +3,6 @@ import MonstersActionsTypes from './monsters.types';
 const INITIAL_STATE = {
     monsterList: [],
     error: null,
-    searchKey: ''
 }
 const monsterReducer = (state = INITIAL_STATE,action) => {
     switch(action.type) {
@@ -25,11 +24,6 @@ const monsterReducer = (state = INITIAL_STATE,action) => {
             return {
                 ...state,
                 error: action.payload
-            }
-        case MonstersActionsTypes.SET_SEARCH_KEY:
-            return {
-                ...state,
-                searchKey: action.payload
             }
         default: 
             return state;

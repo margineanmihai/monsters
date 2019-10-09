@@ -20,7 +20,7 @@ class CardList extends React.Component {
 
 const mapStateToProps = state => ({
     monsters: state.monsters.monsterList,
-    searchKey: state.monsters.searchKey
+    searchKey: state.searchKey.searchKey
 })
 
 export default connect(mapStateToProps)(CardList);

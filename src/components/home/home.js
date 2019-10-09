@@ -4,7 +4,7 @@ import {Search} from '../search/search';
 import CardList from '../card-list/card-list';
 import {Button} from './home.styles';
 import {fetchMonstersStart} from "../../redux/monsters/monsters.actions";
-import {setSearchKey} from "../../redux/monsters/monsters.actions";
+import {setSearchKey} from "../../redux/search/search.actions";
 class Home extends React.Component {
     constructor(props) {
         super(props);
