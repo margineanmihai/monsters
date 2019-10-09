@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import {AppTitle} from '../../App.styles.js';
 import { Button,Input,Textarea } from './post-list.styles';
 import {CardContainer} from '../card/card.styles';
-import {setPostsList} from "../../redux/posts/posts.actions";
+import {fetchPostsStart} from "../../redux/posts/posts.actions";
+import {updatePosts} from "../../redux/posts/posts.actions";
 import {deletePost} from "../../redux/posts/posts.actions";
 import {editPost} from "../../redux/posts/posts.actions";
 
@@ -17,17 +18,8 @@ class PostList extends React.Component {
     };
     componentDidMount () {
         const {userId} = this.props.match.params;
-
-        fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-            .then(response => response.json())
-            .then(posts => 
-                {
-                    posts.length && posts.map(post => 
-                        post.editMode = false
-                    )
-                    this.props.setPostsList(posts)
-                    this.setState({ userId })
-                });
+        this.setState({ userId })
+        this.props.fetchPostsStart(userId);
     }
 
     handleDelete = (id) => {
@@ -44,12 +36,11 @@ class PostList extends React.Component {
 
     handleEdit = (id) => {
         const {posts} = this.props;
-        console.log("posts = ", posts); 
         const editedPost = posts.length && posts.find(function(post) {
             return post.id === id;
         })
         editedPost.editMode = true;
-        this.props.setPostsList(posts);
+        this.props.updatePosts([...posts]);
     }
 
     handleSave = (id) => {
@@ -74,7 +65,7 @@ class PostList extends React.Component {
             })
         .then(data => {
                 console.log("save response = ",data);
-                this.props.setPostsList(posts);
+                this.props.updatePosts([...posts]);
             })
         .catch(error => console.error(error));
     }
@@ -148,7 +139,8 @@ class PostList extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    setPostsList: posts => dispatch(setPostsList([...posts])),
+    fetchPostsStart: (userId) => dispatch(fetchPostsStart(userId)),
+    updatePosts: (posts) => dispatch(updatePosts(posts)),
     deletePost: id => dispatch(deletePost(id)),
     editPost: newPost => dispatch(editPost(newPost))
 })

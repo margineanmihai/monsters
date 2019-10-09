@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Search} from '../search/search';
 import CardList from '../card-list/card-list';
 import {Button} from './home.styles';
-import {setMonsterList} from "../../redux/monsters/monsters.actions";
+import {fetchMonstersStart} from "../../redux/monsters/monsters.actions";
 import {setSearchKey} from "../../redux/monsters/monsters.actions";
 class Home extends React.Component {
     constructor(props) {
@@ -21,9 +21,7 @@ class Home extends React.Component {
     }
     
     componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(monsters => this.props.setMonsterList(monsters));
+        this.props.fetchMonstersStart();
     }
 
     render() {
@@ -38,7 +36,7 @@ class Home extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    setMonsterList: monsters => dispatch(setMonsterList(monsters)),
+    fetchMonstersStart: () => dispatch(fetchMonstersStart()),
     setSearchKey: search_key => dispatch(setSearchKey(search_key))
 })
 export default connect(null, mapDispatchToProps)(Home);
