@@ -3,7 +3,6 @@ import {call, put, takeLatest} from "redux-saga/effects";
 import {fetchPostsSuccess, fetchPostsFailure} from "./posts.actions";
 
 export function* fetchPostsAsync(action) {
-    console.log(action);
     const fetchPosts = (id) => fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
       .then(response => {
         if (!response.ok) {

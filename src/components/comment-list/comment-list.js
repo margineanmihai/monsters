@@ -2,19 +2,14 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppTitle} from '../../App.styles.js';
 import {CardContainer} from '../card/card.styles';
-import {setCommentsList} from "../../redux/comments/comments.actions";
+import {fetchCommentsStart} from "../../redux/comments/comments.actions";
 
 class CommentList extends React.Component {
 
     componentDidMount () {
         const params = new URLSearchParams(this.props.location.search);
-        const postId = params.get("postId")
-        fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-            .then(response => response.json())
-            .then(comments => 
-                {
-                    this.props.setCommentsList(comments)
-                });
+        const postId = params.get("postId");
+        this.props.fetchCommentsStart(postId);
     }
 
     render() {
@@ -39,7 +34,7 @@ class CommentList extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    setCommentsList: comments => dispatch(setCommentsList([...comments]))
+    fetchCommentsStart: (postId) => dispatch(fetchCommentsStart(postId))
 })
 
 const mapStateToProps = state => ({

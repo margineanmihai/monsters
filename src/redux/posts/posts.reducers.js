@@ -2,7 +2,7 @@ import PostsActionsTypes from './posts.types';
 
 const INITIAL_STATE = {
     postsList: [],
-    error: null,
+    error: null
 }
 const postReducer = (state = INITIAL_STATE,action) => {
     switch(action.type) {

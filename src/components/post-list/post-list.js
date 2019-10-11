@@ -76,7 +76,7 @@ class PostList extends React.Component {
             return post.id === postId;
         })
         editedPost.title = event.target.value;
-        this.props.setPostsList(posts);
+        this.props.updatePosts(posts);
     }
     handleBodyChange = (event, postId) => {
         const {posts} = this.props;  
@@ -84,7 +84,7 @@ class PostList extends React.Component {
             return post.id === postId;
         })
         editedPost.body = event.target.value;
-        this.props.setPostsList(posts);
+        this.props.updatePosts(posts);
     }
 
     render() {
