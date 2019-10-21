@@ -1,7 +1,6 @@
 import React from 'react';
+import {SearchInput} from './search.styles';
 
 export const Search = ({handleChange, placeholder}) => {
-    // const handleChange = props.handleChange;
-    // const {handleChange} = props;
-    return <input type="search" placeholder={placeholder} onChange={handleChange} />
+    return <SearchInput type="search" placeholder={placeholder} onChange={handleChange} />
 }
